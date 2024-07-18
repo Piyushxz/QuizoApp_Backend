@@ -1,9 +1,11 @@
 const express = require('express')
 const quizzes = require("./db/quizzes")
+const cors = require("cors")
 const app = express()
 
-const PORT = 3001;
 
+const PORT = 3001;
+app.use(cors());
 app.get("/",(req,res)=>{
     res.send("Hello WOrld");
 })
