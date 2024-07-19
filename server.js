@@ -3,6 +3,7 @@ const cors = require("cors")
 const app = express()
 const quizRouter = require("./router/quiz.router")
 const loginRouter = require('./router/auth.router')
+const signUpRouter = require('./router/auth.router')
 require('dotenv').config(); // Load environment variables from .env file
 
 
@@ -22,6 +23,7 @@ app.get("/",(req,res)=>{
 
 app.use("/quiz",quizRouter);
 app.use("/auth/login",loginRouter);
+app.use("/auth/signup",signUpRouter);
 app.listen(process.env.PORT || PORT,()=>{
     console.log("Server started");
 })
