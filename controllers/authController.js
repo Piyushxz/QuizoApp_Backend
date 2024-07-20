@@ -2,17 +2,7 @@ const {v4: uuid} = require("uuid")
 const userdata = require("../db/users")
 const jwt = require("jsonwebtoken")
 
-const authVerify = (req, res, next) => {
-    const token = req.headers.authorization;
-    try {
-        const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
-        req.user = { userId:  decodedToken.id }
-        return next();
-    }catch(err){
-        console.error(`error from server ${JSON.stringify(err)}`)
-    }
 
-}
 
 
 
@@ -44,4 +34,4 @@ const loginHandler = (req,res)=>{
         res.status(401).send("Invalid user")
     }
 }
-module.exports = {loginHandler,signUpHandler,authVerify}
+module.exports = {loginHandler,signUpHandler}
