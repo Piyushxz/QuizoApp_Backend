@@ -11,7 +11,6 @@ require('dotenv').config(); // Load environment variables from .env file
 const PORT = 3001;
 app.use(cors());
 app.use(express.json());
-app.use(routeNotFound);
 
 app.get("/",(req,res)=>{
     res.send("Hello WOrld");
@@ -25,6 +24,8 @@ app.get("/",(req,res)=>{
 app.use("/quiz",quizRouter);
 app.use("/auth/login",loginRouter);
 app.use("/auth/signup",signUpRouter);
+app.use(routeNotFound);
+
 app.listen(process.env.PORT || PORT,()=>{
     console.log("Server started");
 })
