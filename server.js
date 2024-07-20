@@ -2,8 +2,8 @@ const express = require('express')
 const cors = require("cors")
 const app = express()
 const quizRouter = require("./router/quiz.router")
-const loginRouter = require('./router/auth.router')
-const signUpRouter = require('./router/auth.router')
+const {loginRouter,signUpRouter} = require("./router/auth.router")
+
 require('dotenv').config(); // Load environment variables from .env file
 
 

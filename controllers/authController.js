@@ -1,6 +1,20 @@
 const {v4: uuid} = require("uuid")
 const userdata = require("../db/users")
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken")
+
+const authVerify = (req, res, next) => {
+    const token = req.headers.authorization;
+    try {
+        const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
+        req.user = { userId:  decodedToken.id }
+        return next();
+    }catch(err){
+        console.error(`error from server ${JSON.stringify(err)}`)
+    }
+
+}
+
+
 
 const signUpHandler = (req,res) =>{
     const {username,password} = req.body;
@@ -14,7 +28,7 @@ const signUpHandler = (req,res) =>{
         const newUser = {id,username,password};
         userdata.users = [...userdata.users,newUser];
         const token = jwt.sign({id:username},process.env.SECRET_TOKEN)
-        res.json({message:`Created New User username ${username}, password ${password}`});
+        res.json({message:`Created New User username ${username}, password ${password} token ${token}`});
     }
 }
 
@@ -30,6 +44,4 @@ const loginHandler = (req,res)=>{
         res.status(401).send("Invalid user")
     }
 }
-
-module.exports = loginHandler
-module.exports = signUpHandler;
+module.exports = {loginHandler,signUpHandler,authVerify}

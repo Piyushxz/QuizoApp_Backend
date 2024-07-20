@@ -1,9 +1,11 @@
 const express = require("express");
 const quizzes = require("../db/quizzes");
 const quizRouter = express.Router();
+const {authVerify} = require("../controllers/authController")
 
-quizRouter.get("/", (req, res) => {
-    res.json(quizzes); // Use res.send to send the quiz data
-});
+quizRouter.route("/")
+    .get(authVerify, (req, res) => {
+        res.json(quizzes)
+    });
 
 module.exports = quizRouter;
