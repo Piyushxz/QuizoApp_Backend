@@ -1,7 +1,7 @@
 const {v4: uuid} = require("uuid")
 const userdata = require("../db/users")
 const jwt = require("jsonwebtoken")
-
+require('dotenv').config(); 
 
 
 
